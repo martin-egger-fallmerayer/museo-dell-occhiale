@@ -38,6 +38,12 @@ projectsRouter.get("/:projectName/objects/:name", async (req, res) => {
   res.json(object);
 });
 
+projectsRouter.get("/all", async (_, res) => {
+  const projects = await prisma.project.findMany();
+  res.json(projects);
+});
+
+
 // [POST] a project
 projectsRouter.post("/", async (req, res) => {
   const newProject = await prisma.project.create({ data: req.body });

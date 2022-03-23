@@ -13,7 +13,7 @@ datasource db {
 model Project {
   name        String   @id @unique
   createdAt   String
-  descrpition String   @default("no description")
+  description String   @default("no description")
   model       String   @default("no model")
   Object      Object[]
 }
