@@ -10,7 +10,7 @@
     "prisma": "^3.11.0"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon -e prisma index.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

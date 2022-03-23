@@ -13,8 +13,29 @@ projectsRouter.get("/", async (_, res) => {
 // [GET] one project by name
 projectsRouter.get("/:name", async (req, res) => {
   const { name } = req.params;
-  const projects = await prisma.project.findMany({ where: { name } });
+  const projects = await prisma.project.findUnique({
+    where: { name },
+  });
   res.json(projects);
+});
+
+// [GET] objects of project by projectName
+projectsRouter.get("/:name/objects", async (req, res) => {
+  const { name } = req.params;
+  const objects = await prisma.object.findMany({
+    where: { projectName: name },
+  });
+  res.json(objects);
+});
+
+// [GET] one object of project by name
+projectsRouter.get("/:projectName/objects/:name", async (req, res) => {
+  const { projectName, name } = req.params;
+  const objects = await prisma.object.findMany({
+    where: { projectName },
+  });
+  const object = objects.filter((obj) => obj.name === name);
+  res.json(object);
 });
 
 // [POST] a project

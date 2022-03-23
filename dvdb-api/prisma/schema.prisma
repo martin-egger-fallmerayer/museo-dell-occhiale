@@ -11,17 +11,20 @@ datasource db {
 }
 
 model Project {
-  name      String   @id @unique
-  createdAt String
-  Object    Object[]
+  name        String   @id @unique
+  createdAt   String
+  descrpition String   @default("no description")
+  model       String   @default("no model")
+  Object      Object[]
 }
 
 model Object {
   name        String  @id @unique
   description String
-  image       String
-  model       String
+  image       String  @default("no image")
+  model       String  @default("no model")
   type        String
+  location    String  @default("no location")
   project     Project @relation(fields: [projectName], references: [name])
   projectName String
 }
