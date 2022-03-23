@@ -38,7 +38,7 @@ const Model = () => {
   /* Load model */
   useEffect(() => {
     const loader = new GLTFLoader();
-    loader.load("neon-party-glasses/source/PartyGlass/PartyGlass.gltf", async (gltf) => {
+    loader.load("robot/scene.gltf", async (gltf) => {
       const nodes = await gltf.parser.getDependencies("node");
       const animations = await gltf.parser.getDependencies("animation");
       setModel(nodes[0]);
@@ -68,7 +68,7 @@ const Model = () => {
   return (
     <>
       {model ? (
-        <group ref={group} position={[100, -50, -30 ]} dispose={null}>
+        <group ref={group} position={[100, -50, -30]} dispose={null}>
           <primitive ref={group} name="Object_0" object={model} />
         </group>
       ) : (
