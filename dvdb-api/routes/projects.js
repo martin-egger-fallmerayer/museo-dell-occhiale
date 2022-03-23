@@ -10,7 +10,7 @@ projectsRouter.get("/", async (_, res) => {
   res.json(projects);
 });
 
-// [GET] one project by id
+// [GET] one project by name
 projectsRouter.get("/:name", async (req, res) => {
   const { name } = req.params;
   const projects = await prisma.project.findMany({ where: { name } });
