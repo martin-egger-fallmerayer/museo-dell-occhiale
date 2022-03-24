@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^3.11.0",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "mongodb": "^4.4.1",
     "prisma": "^3.11.0",
