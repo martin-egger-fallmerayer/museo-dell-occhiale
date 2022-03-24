@@ -6,7 +6,7 @@ const projectsRouter = require("./routes/projects");
 const app = express();
 const port = 4000;
 
-app.use(cors())
+app.use(cors({ origin: '*' }))
 app.use(express.json());
 app.use("/projects", projectsRouter);
 
