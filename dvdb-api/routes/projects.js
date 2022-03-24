@@ -1,20 +1,21 @@
 const Router = require("express").Router;
 const { PrismaClient } = require("@prisma/client");
-const { query } = require("express");
 const projectsRouter = Router();
 
 const prisma = new PrismaClient();
 
 // [GET] all projects
 projectsRouter.get("/", async (req, res) => {
-  if("names" in  req.query){
-    const names = await prisma.project.findMany({select: { name: true }})
-    res.json(names.map(obj => obj.name))
-  } else {
+  // all names
+  if ("names" in req.query) {
+    const names = await prisma.project.findMany({ select: { name: true } });
+    res.json(names.map((obj) => obj.name));
+  }
+  // all projects
+  else {
     const projects = await prisma.project.findMany();
     res.json(projects);
   }
-  
 });
 
 // [GET] one project by name
@@ -29,10 +30,28 @@ projectsRouter.get("/:name", async (req, res) => {
 // [GET] objects of project by projectName
 projectsRouter.get("/:name/objects", async (req, res) => {
   const { name } = req.params;
-  const objects = await prisma.object.findMany({
-    where: { projectName: name },
-  });
-  res.json(objects);
+
+  console.log("[GET] objects")
+
+  // search objects
+  if ("search" in req.query) {
+    console.log("search")
+    const searchObjects = await prisma.object.findMany({
+      where: {
+        name: { contains: req.query.search },
+      },
+    });
+    req.json(searchObjects);
+  }
+
+  // all objects
+  else {
+    console.log("not search")
+    const objects = await prisma.object.findMany({
+      where: { projectName: name },
+    });
+    res.json(objects);
+  }
 });
 
 // [GET] one object of project by name
@@ -50,7 +69,6 @@ projectsRouter.get("/names", async (_, res) => {
   const names = await prisma.project.findMany();
   res.json(names);
 });
-
 
 // [POST] a project
 projectsRouter.post("/", async (req, res) => {

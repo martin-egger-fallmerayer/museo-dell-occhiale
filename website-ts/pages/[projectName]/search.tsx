@@ -3,18 +3,24 @@ import type { NextPage } from "next";
 import styles from "../../styles/Search.module.scss";
 
 import { HiSearch } from "react-icons/hi";
+import { useState } from "react";
+import { Router, useRouter } from "next/router";
 
 type Props = {
 	project: any;
+	q: string;
 };
 
 type Context = {
 	params: {
 		projectName: string;
 	};
+	query: {
+		q: string;
+	};
 };
 
-const ProjectHomePage: NextPage<Props> = ({ project }) => {
+const ProjectHomePage: NextPage<Props> = (props) => {
 	// example data
 	const recentTerms = ["term1", "term2", "term3", "term4", "term5"];
 
@@ -75,13 +81,22 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 		},
 	];
 
+	const [searchTerm, setSearchTerm] = useState<string>(
+		"q" in props ? props.q : ""
+	);
+
 	return (
 		<>
 			<HeaderMenu />
 
 			<div className={styles.body}>
 				<div className={styles.searchBar}>
-					<input type="text" placeholder="Search..." />
+					<input
+						type="text"
+						placeholder="Search..."
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
+					/>
 					<HiSearch />
 				</div>
 
@@ -111,26 +126,16 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 	);
 };
 
-export async function getStaticPaths() {
-	const res = await fetch("http://10.10.30.67:4000/projects?names");
-	const names = await res.json();
-	const paths = names.map((name: string) => {
-		return { params: { projectName: name } };
-	});
-
-	return {
-		paths,
-		fallback: false,
-	};
-}
-
-export async function getStaticProps(context: Context) {
+export async function getServerSideProps(context: Context) {
 	const { projectName } = context.params;
 	const res = await fetch("http://10.10.30.67:4000/projects/" + projectName);
 	const project = await res.json();
 
+	const { q } = context.query;
+	if (q === undefined) return { props: { project } };
+
 	return {
-		props: { project },
+		props: { project, q },
 	};
 }
 

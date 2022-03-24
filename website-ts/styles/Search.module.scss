@@ -3,6 +3,7 @@
 	flex-direction: column;
     justify-content: center;
 
+    margin: 0 2em;
 
 	.searchBar {
         display: flex;
@@ -46,21 +47,24 @@
     }
 
     .searchResults {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18em, 2fr));;
+        gap: 2em;
         margin-top: 2em;
 
         overflow: hidden;
 
         .resultCard {
             display: flex;
+            gap: 1em;
             div {
                 h1 {
                     overflow: hidden;
                 }
                 p {
-                    overflow: hidden;
+                    word-break: break-word;
+                    width: min(50ch, 100%);
+                    height: 5em;
                 }
             }
         }
