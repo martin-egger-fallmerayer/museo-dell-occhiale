@@ -17,7 +17,8 @@
 	}
 
 	input[type="button"] {
-		background-color: white;
+		margin-top: 2em;
+        background-color: white;
 		border: none;
 		outline: none;
 		padding: 0.5em 1em;
@@ -36,8 +37,9 @@
 	}
 
 	p {
-		margin-top: 2em;
+		margin-top: 3em;
 		font-family: fonts.$roboto-condensed;
+        margin-bottom: 3em;
 	}
 }
 

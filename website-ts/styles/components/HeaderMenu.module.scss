@@ -2,6 +2,7 @@
 @use "./abstracts/colors";
 
 .header {
+	z-index: 1;
 	position: sticky;
 	top: 0;
 	display: flex;
@@ -81,11 +82,9 @@
 }
 
 @media screen and (min-width: 992px) {
-       
 	.menu {
 		a {
 			width: 40%;
 		}
 	}
-    
 }
