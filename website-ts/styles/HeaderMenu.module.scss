@@ -1,10 +1,6 @@
 @use "./abstracts/fonts";
 @use "./abstracts/colors";
 
-.hamburger {
-	background-color: red;
-}
-
 .header {
 	position: sticky;
 	top: 0;
@@ -48,48 +44,9 @@
 	}
 }
 
-.body {
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	padding: 0 2em;
-
-	h1 {
-		margin-top: 0.8em;
-		font-size: 3em;
-		font-family: fonts.$big-shoulders-display;
-		text-align: center;
-		text-transform: uppercase;
-	}
-
-	input[type="button"] {
-		background-color: white;
-		border: none;
-		outline: none;
-		padding: 0.5em 1em;
-
-		font-size: 1.5em;
-		font-weight: bold;
-		border-radius: 1em;
-	}
-
-	.model {
-		margin-top: 3em;
-		text-align: center;
-
-		width: 100%;
-		height: 22rem;
-	}
-
-	p {
-		margin-top: 2em;
-		font-family: fonts.$roboto-condensed;
-	}
-}
-
 .menu {
 	z-index: 1;
-    position: fixed;
+	position: fixed;
 	background-color: colors.$dark-green;
 	width: 100vw;
 	display: flex;
@@ -101,15 +58,15 @@
 	animation: rotateX 100ms forwards;
 	transform-origin: top center;
 	@keyframes rotateX {
-        0% {
-          opacity: 0;
-          transform: rotateX(-90deg);
-        }
-        100% {
-          opacity: 1;
-          transform: rotateX(0deg);
-        }
-      }
+		0% {
+			opacity: 0;
+			transform: rotateX(-90deg);
+		}
+		100% {
+			opacity: 1;
+			transform: rotateX(0deg);
+		}
+	}
 
 	a {
 		background-color: colors.$light-green;

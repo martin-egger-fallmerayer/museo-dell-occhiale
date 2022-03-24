@@ -9,11 +9,12 @@ import Lights from "./Lights";
 
 type Props = {
   Model: any;
+  camera: any
 };
 
 
 
-const Scene = ({ Model }: Props) => {
+const Scene = ({ Model, camera }: Props) => {
 
     return (
     <div className={styles.scene}>
@@ -21,7 +22,7 @@ const Scene = ({ Model }: Props) => {
         shadows={true}
         className={styles.canvas}
         camera={{
-          position: [-0.25, .2, .3],
+          position: camera,
         }}
       >
         <Lights />
