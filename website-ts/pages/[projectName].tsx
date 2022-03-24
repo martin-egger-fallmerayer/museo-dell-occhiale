@@ -30,7 +30,7 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 			<div className={styles.body}>
 				<h1>{project.name}</h1>
 				<input type="button" value="Search"
-					onClick={e => router.push("/" + project.name + "/search")}
+					onClick={_ => router.push("/" + project.name + "/search")}
 				/>
 				<div className={styles.model}>
 					<Scene

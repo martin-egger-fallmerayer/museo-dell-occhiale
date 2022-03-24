@@ -14,7 +14,7 @@ import Model from "./Model"
 
 const Scene = () => {
 
-    const { scene } = useGLTF("/logo.glb", true);
+    
 
     return (
         <div className={styles.scene}>
