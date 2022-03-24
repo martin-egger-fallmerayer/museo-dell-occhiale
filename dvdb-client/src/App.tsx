@@ -17,16 +17,18 @@ type Project = {
 const App = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [showCreateProject, setShowCreateProject] = useState(false);
+  const [corsError, setCorsError] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    file: ''
+    model: ''
   })
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const res = await fetch("http://localhost:4000/projects");
-      setProjects(await res.json());
+      const res = await fetch("http://localhost:4000/projects")
+        .catch(() => setCorsError(true))
+      setProjects(await res?.json());
     };
     fetchProjects();
   }, []);
@@ -34,6 +36,8 @@ const App = () => {
   return (
     <div className="App">
       <h1>Projects</h1>
+
+      { corsError && <h1>CORS ERROR</h1> }
 
       <Container>
         <Button variant="primary" onClick={() => setShowCreateProject(true)}>
@@ -81,7 +85,7 @@ const App = () => {
 
       <Container>
         {projects.map((project) => (
-          <Card>
+          <Card key={project.name}>
             <Card.Title>{project.name}</Card.Title>
           </Card>
         ))}

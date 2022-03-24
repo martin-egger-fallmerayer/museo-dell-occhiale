@@ -1,6 +1,9 @@
 const Router = require("express").Router;
 const { PrismaClient } = require("@prisma/client");
 const projectsRouter = Router();
+const { Temporal } = require("@js-temporal/polyfill");
+const cors = require("cors");
+projectsRouter.use(cors({ origin: "*" }));
 
 const prisma = new PrismaClient();
 
@@ -68,7 +71,12 @@ projectsRouter.get("/names", async (_, res) => {
 
 // [POST] a project
 projectsRouter.post("/", async (req, res) => {
-  const newProject = await prisma.project.create({ data: req.body });
+  console.log("[POST] one project");
+  const project = {
+    ...req.body,
+    createdAt: Temporal.Now.plainDateISO().toString(),
+  };
+  const newProject = await prisma.project.create({ data: project });
   res.json(newProject);
 });
 
