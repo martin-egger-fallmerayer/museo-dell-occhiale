@@ -1,2 +1,5 @@
-$big-shoulders-display: url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;500;700&display=swap');
-$rototo-condensed: url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;500;700&family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;500;700&family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+$big-shoulders-display: 'Big Shoulders Display', cursive;
+$roboto-condensed: 'Roboto Condensed', sans-serif;

@@ -1,5 +1,11 @@
 import type { NextPage } from "next";
 import styles from "../styles/ProjectHomePage.module.scss";
+import logo from "../public/Logsiv-logos_white.png"
+
+import Image from 'next/image'
+import Scene from "components/three/Scene";
+import Persian from "components/three/Persian";
+import { HiMenu, HiX } from "react-icons/hi";
 
 type Props = {
 	project: any;
@@ -18,16 +24,28 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 		<>
 			{/* Header */}
 			<div className={styles.header}>
-				<img className="" src="" alt="logo" />
+				<Image src={logo} height={90} width={90} />
 				<p>TFO Fallmerayer</p>
-				<div>III</div>
+				<div><HiMenu className={styles.menuIcon} /></div>
+			</div>
+
+			<div className={styles.menu}>
+					<a href="#">ITEM 1</a>
+					<a href="#">ITEM 2</a>
+					<a href="#">ITEM 3</a>
 			</div>
 
 			{/* Body */}
 			<div className={styles.body}>
-				<h1>{project.name}</h1>
-				<input type="button" value="search" />
-				<div className={styles.model}>djflsdjkf</div>
+
+				{/* <h1>{project.name}</h1> */}
+				<h1>Museo dell' occhiale</h1>
+				<input type="button" value="Search" />
+				{/* <div className={styles.model}>Hier hönnte ihr 3D Modell stehen</div> */}
+				<div className={styles.model}>
+				<Scene Model={<Persian/>} />
+				</div>
+				
 				<p>{project.description}</p>
 			</div>
 
@@ -54,7 +72,7 @@ export async function getStaticProps(context: Context) {
 	const project = await res.json();
 
 	return {
-		props: { project }, // will be passed to the page component as props
+		props: { project },
 	};
 }
 
