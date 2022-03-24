@@ -1,53 +1,6 @@
 @use "./abstracts/fonts";
 @use "./abstracts/colors";
 
-.hamburger {
-	background-color: red;
-}
-
-.header {
-	position: sticky;
-	top: 0;
-	display: flex;
-	justify-content: space-between;
-	height: 6em;
-
-	background-color: colors.$dark-green;
-	border-bottom: 1px solid black;
-
-	img {
-		height: 100%;
-		width: 5em;
-		display: grid;
-		place-items: center;
-	}
-
-	p {
-		margin: 0;
-		display: grid;
-		place-items: center;
-		text-align: center;
-		font-size: 1rem;
-		font-family: fonts.$roboto-condensed;
-		font-weight: bold;
-	}
-
-	div {
-		height: 100%;
-		width: 5em;
-		display: grid;
-		place-items: center;
-		p {
-			transform: rotate(90deg);
-		}
-	}
-
-	.menuIcon {
-		height: 2rem;
-		width: 2rem;
-	}
-}
-
 .body {
 	display: flex;
 	flex-flow: column;
@@ -56,6 +9,7 @@
 
 	h1 {
 		margin-top: 0.8em;
+        margin-bottom: 0;
 		font-size: 3em;
 		font-family: fonts.$big-shoulders-display;
 		text-align: center;
@@ -87,38 +41,36 @@
 	}
 }
 
-.menu {
-	z-index: 1;
-    position: fixed;
-	background-color: colors.$dark-green;
-	width: 100vw;
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-	gap: 2em;
-	padding: 2em 0;
+@media screen and (min-width: 992px) {
+    .body {
+        align-items: flex-start;
+        justify-content: flex-start;
 
-	animation: rotateX 100ms forwards;
-	transform-origin: top center;
-	@keyframes rotateX {
-        0% {
-          opacity: 0;
-          transform: rotateX(-90deg);
+        h1 {
+            // height: 5em;
+            font-size: 7em;
+            text-align: start;
+            width: 12ch;
+            margin-top: .2em;
         }
-        100% {
-          opacity: 1;
-          transform: rotateX(0deg);
-        }
-      }
 
-	a {
-		background-color: colors.$light-green;
-		width: 80%;
-		height: 3em;
-		border-radius: 1em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-	}
+        input[type="button"] {
+            margin-top: 1.5em;
+            padding: .5em 4em;
+        }
+
+        p {
+            font-size: 1.2em;
+            width: 75ch;
+        }
+
+        .model {
+            position: fixed;
+            right: 2em;
+            width: 30%;
+        }
+
+    }    
+
+    
 }

@@ -79,3 +79,13 @@
 		text-align: center;
 	}
 }
+
+@media screen and (min-width: 992px) {
+       
+	.menu {
+		a {
+			width: 40%;
+		}
+	}
+    
+}
