@@ -1,9 +1,12 @@
 import type { NextPage } from "next";
 import styles from "../styles/ProjectHomePage.module.scss";
+import { useRouter } from "next/router";
 
+// three.js
 import Scene from "components/three/Scene";
 import Model from "components/three/Model";
 
+// components
 import HeaderMenu from "components/HeaderMenu";
 
 type Props = {
@@ -17,13 +20,18 @@ type Context = {
 };
 
 const ProjectHomePage: NextPage<Props> = ({ project }) => {
+	
+	const router = useRouter()
+	
 	return (
 		<>
 			<HeaderMenu />
 
 			<div className={styles.body}>
 				<h1>{project.name}</h1>
-				<input type="button" value="Search" />
+				<input type="button" value="Search"
+					onClick={e => router.push("/" + project.name + "/search")}
+				/>
 				<div className={styles.model}>
 					<Scene
 						Model={

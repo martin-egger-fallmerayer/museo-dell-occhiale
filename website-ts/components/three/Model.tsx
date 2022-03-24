@@ -11,7 +11,7 @@ type Props = {
   position: any
 };
 
-const Persian = ({ path, position }: Props) => {
+const Model = ({ path, position }: Props) => {
   const { scene } = useGLTF(path, true);
   return (
     <primitive position={position} object={scene} dispose={null} />
@@ -20,4 +20,4 @@ const Persian = ({ path, position }: Props) => {
 
 
 
-export default Persian;
+export default Model;

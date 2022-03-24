@@ -1,3 +1,69 @@
 .body {
-    background-color: red;
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+
+
+	.searchBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+		margin-top: 2em;
+		padding: 1em;
+        width: 100%;
+		border-radius: 2em;
+		border: 1px solid white;
+
+		input[type="text"] {
+			background-color: transparent;
+			outline: none;
+            border: none;
+			outline: none;
+			font-size: 1.2em;
+            color: white;
+		}
+
+        svg {
+            aspect-ratio: 1/1;
+            scale: 1.3;
+        }
+
+	}
+
+    .recentTerms {
+        display: flex;
+        gap: 1em;
+        overflow: hidden;
+        overflow-x: scroll;
+
+        p {
+            border: 2px solid white;
+            border-radius: .5em;
+            font-size: 1.2em;
+            padding: .5em 1em;
+        }
+
+    }
+
+    .searchResults {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        overflow: hidden;
+
+        .resultCard {
+            display: flex;
+            div {
+                h1 {
+                    overflow: hidden;
+                }
+                p {
+                    overflow: hidden;
+                }
+            }
+        }
+
+    }
+
 }
