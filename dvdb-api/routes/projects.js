@@ -31,22 +31,18 @@ projectsRouter.get("/:name", async (req, res) => {
 projectsRouter.get("/:name/objects", async (req, res) => {
   const { name } = req.params;
 
-  console.log("[GET] objects")
-
   // search objects
   if ("search" in req.query) {
-    console.log("search")
     const searchObjects = await prisma.object.findMany({
       where: {
         name: { contains: req.query.search },
       },
     });
-    req.json(searchObjects);
+    res.json(searchObjects);
   }
 
   // all objects
   else {
-    console.log("not search")
     const objects = await prisma.object.findMany({
       where: { projectName: name },
     });
