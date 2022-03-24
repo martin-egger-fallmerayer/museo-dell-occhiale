@@ -3,7 +3,7 @@ import styles from "../styles/Search.module.scss";
 
 const Search: NextPage = () => {
 	return <>
-
+		
 	</>;
 };
 

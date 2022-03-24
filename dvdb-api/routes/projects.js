@@ -1,13 +1,20 @@
 const Router = require("express").Router;
 const { PrismaClient } = require("@prisma/client");
+const { query } = require("express");
 const projectsRouter = Router();
 
 const prisma = new PrismaClient();
 
 // [GET] all projects
-projectsRouter.get("/", async (_, res) => {
-  const projects = await prisma.project.findMany();
-  res.json(projects);
+projectsRouter.get("/", async (req, res) => {
+  if("names" in  req.query){
+    const names = await prisma.project.findMany({select: { name: true }})
+    res.json(names.map(obj => obj.name))
+  } else {
+    const projects = await prisma.project.findMany();
+    res.json(projects);
+  }
+  
 });
 
 // [GET] one project by name
@@ -38,9 +45,10 @@ projectsRouter.get("/:projectName/objects/:name", async (req, res) => {
   res.json(object);
 });
 
-projectsRouter.get("/all", async (_, res) => {
-  const projects = await prisma.project.findMany();
-  res.json(projects);
+// [GET] project names
+projectsRouter.get("/names", async (_, res) => {
+  const names = await prisma.project.findMany();
+  res.json(names);
 });
 
 

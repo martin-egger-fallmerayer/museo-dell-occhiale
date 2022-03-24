@@ -1,8 +1,10 @@
 version: "3"
 services:
+
   postgres:
     image: postgres
     restart: always
+    container_name: db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -11,5 +13,20 @@ services:
       - "5432:5432"
     volumes:
       - PGDATA:/var/lib/postgresql/data
+
+  api:
+    depends_on:
+      - postgres
+    container_name: api
+    build: .
+    restart: always
+    ports:
+      - "4000:4000"
+
+
 volumes:
   PGDATA:
+
+
+
+    
