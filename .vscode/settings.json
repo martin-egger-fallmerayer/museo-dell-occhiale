@@ -22,7 +22,8 @@
         "dvdb-api/yarn.lock": true,
         "dvdb-api/prisma/migrations": true,
         "dvdb-api/node_modules": true,
-        "dvdb-api/.vscode": true
+        "dvdb-api/.vscode": true,
+        "website-ts/next.config.js": true
     },
     "hide-files.files": [
         ".vscode",
@@ -41,6 +42,7 @@
         "dvdb-api/yarn.lock",
         "dvdb-api/prisma/migrations",
         "dvdb-api/node_modules",
-        "dvdb-api/.vscode"
+        "dvdb-api/.vscode",
+        "website-ts/next.config.js"
     ]
 }
