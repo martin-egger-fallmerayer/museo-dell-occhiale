@@ -27,7 +27,7 @@ const Scene = () => {
             <Lights />
             <OrbitControls />
             <Suspense fallback={null}>
-                <Model path="/data/logo.glb" position={[0, 1.22, 1.79]}/>
+                <Model path="/data/logo.glb" position={[0, .35, .5]}/>
             </Suspense>
         </Canvas>
     )
