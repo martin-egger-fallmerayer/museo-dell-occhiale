@@ -17,19 +17,20 @@ services:
   postgres-test:
     image: postgres
     restart: always
-    container_name: db
+    container_name: db-test
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=museo-db-test
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - PGDATA-TEST:/var/lib/postgresql/data
 
   api:
     depends_on:
       - postgres
+      - postgres-test
     container_name: api
     build: .
     restart: always
