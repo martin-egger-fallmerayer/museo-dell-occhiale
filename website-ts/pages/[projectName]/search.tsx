@@ -5,6 +5,7 @@ import styles from "../../styles/Search.module.scss";
 import { HiSearch } from "react-icons/hi";
 import { useState } from "react";
 import { Router, useRouter } from "next/router";
+import { API_BASE } from "constants/network";
 
 type Props = {
 	project: any;
@@ -128,7 +129,7 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 
 export async function getServerSideProps(context: Context) {
 	const { projectName } = context.params;
-	const res = await fetch("http://linode.steggmar.tech:4000/projects/" + projectName);
+	const res = await fetch("http://" + API_BASE + "/projects/" + projectName);
 	const project = await res.json();
 
 	// const { q } = context.query;
