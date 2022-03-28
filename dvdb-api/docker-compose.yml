@@ -14,6 +14,19 @@ services:
     volumes:
       - PGDATA:/var/lib/postgresql/data
 
+  postgres-test:
+    image: postgres
+    restart: always
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=museo-db-test
+    ports:
+      - "5432:5432"
+    volumes:
+      - PGDATA-TEST:/var/lib/postgresql/data
+
   api:
     depends_on:
       - postgres
@@ -26,6 +39,7 @@ services:
 
 volumes:
   PGDATA:
+  PGDATA-TEST:
 
 
 
