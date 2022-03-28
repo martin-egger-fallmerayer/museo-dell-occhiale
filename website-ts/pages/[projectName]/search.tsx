@@ -128,14 +128,14 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 
 export async function getServerSideProps(context: Context) {
 	const { projectName } = context.params;
-	const res = await fetch("http://10.10.30.67:4000/projects/" + projectName);
+	const res = await fetch("http://linode.steggmar.tech:4000/projects/" + projectName);
 	const project = await res.json();
 
-	const { q } = context.query;
-	if (q === undefined) return { props: { project } };
+	// const { q } = context.query;
+	// if (q === undefined) return { props: { project } };
 
 	return {
-		props: { project, q },
+		props: { project },
 	};
 }
 

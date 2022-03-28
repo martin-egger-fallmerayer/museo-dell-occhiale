@@ -1,5 +1,5 @@
 export const formCreateProject = async (formData: any) => {
-  const res = await fetch("http://localhost:4000/projects", {
+  const res = await fetch("http://linode.steggmar.tech:4000/projects", {
     method: "POST",
     mode: "cors",
     cache: "no-cache",

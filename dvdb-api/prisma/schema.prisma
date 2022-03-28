@@ -15,16 +15,16 @@ model Project {
   createdAt   String
   description String   @default("no description")
   model       String   @default("no model")
-  Object      Object[]
+  objects     Object[]
 }
 
 model Object {
-  name        String  @id @unique
+  name        String   @id @unique
   description String
-  image       String  @default("no image")
-  model       String  @default("no model")
+  image       String   @default("no image")
+  model       String   @default("no model")
   type        String
-  location    String  @default("no location")
-  project     Project @relation(fields: [projectName], references: [name])
-  projectName String
+  location    String   @default("no location")
+  Project     Project? @relation(fields: [projectName], references: [name])
+  projectName String?
 }

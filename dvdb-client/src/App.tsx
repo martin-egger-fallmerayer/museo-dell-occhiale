@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
+
 import "./App.css";
 
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
-import Card from "react-bootstrap/esm/Card";
 import Modal from "react-bootstrap/esm/Modal";
 import Form from "react-bootstrap/esm/Form";
 import { formCreateProject } from "./controller/Form";
 
-import { MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardFooter, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardFooter,
+} from "mdb-react-ui-kit";
 
 type Project = {
   name: string;
   description: string;
+  createdAt: string;
 };
 
 const App = () => {
@@ -29,9 +34,9 @@ const App = () => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const res = await fetch("http://localhost:4000/projects").catch(() =>
-        setCorsError(true)
-      );
+      const res = await fetch(
+        "http://linode.steggmar.tech:4000/projects"
+      ).catch(() => setCorsError(true));
       setProjects(await res?.json());
     };
     fetchProjects();
@@ -100,74 +105,17 @@ const App = () => {
         </Modal>
       </Container>
 
-      <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-        <MDBCol>
-          <MDBCard className="h-100">
-            <MDBCardImage
-              src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle>Card title</MDBCardTitle>
-              <MDBCardText>
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </MDBCardText>
-            </MDBCardBody>
-            <MDBCardFooter>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </MDBCardFooter>
-          </MDBCard>
-        </MDBCol>
-        <MDBCol>
-          <MDBCard className="h-100">
-            <MDBCardImage
-              src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle>Card title</MDBCardTitle>
-              <MDBCardText>
-                This card has supporting text below as a natural lead-in to
-                additional content.
-              </MDBCardText>
-            </MDBCardBody>
-            <MDBCardFooter>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </MDBCardFooter>
-          </MDBCard>
-        </MDBCol>
-        <MDBCol>
-          <MDBCard className="h-100">
-            <MDBCardImage
-              src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-              alt="..."
-              position="top"
-            />
-            <MDBCardBody>
-              <MDBCardTitle>Card title</MDBCardTitle>
-              <MDBCardText>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This card has even longer content
-                than the first to show that equal height action.
-              </MDBCardText>
-            </MDBCardBody>
-            <MDBCardFooter>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </MDBCardFooter>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-
-      <Container>
+      <Container className="grid gap-4">
         {projects.map((project) => (
-          <Card key={project.name} className="mb-3">
-            <Card.Title>{project.name}</Card.Title>
-            <Card.Body>{project.description}</Card.Body>
-          </Card>
+          <MDBCard className="h-100 w-75 hover:scale-105 hover:cursor-pointer hover:shadow-xl">
+            <MDBCardBody>
+              <MDBCardTitle>{project.name}</MDBCardTitle>
+              <MDBCardText>{project.description}</MDBCardText>
+            </MDBCardBody>
+            <MDBCardFooter>
+              <small className="text-muted">{project.createdAt}</small>
+            </MDBCardFooter>
+          </MDBCard>
         ))}
       </Container>
     </div>

@@ -18,12 +18,11 @@
         "website-ts/yarn-error.log": true,
         "website-ts/tsconfig.json": true,
         "website-ts/yarn.lock": true,
-        "dvdb-api/node_modules": true,
-        "dvdb-api/.env": true,
         "dvdb-api/.dockerignore": true,
-        "dvdb-api/.gitignore": true,
         "dvdb-api/yarn.lock": true,
-        "dvdb-api/prisma/migrations": true
+        "dvdb-api/prisma/migrations": true,
+        "dvdb-api/node_modules": true,
+        "dvdb-api/.vscode": true
     },
     "hide-files.files": [
         ".vscode",
@@ -38,11 +37,10 @@
         "website-ts/yarn-error.log",
         "website-ts/tsconfig.json",
         "website-ts/yarn.lock",
-        "dvdb-api/node_modules",
-        "dvdb-api/.env",
         "dvdb-api/.dockerignore",
-        "dvdb-api/.gitignore",
         "dvdb-api/yarn.lock",
-        "dvdb-api/prisma/migrations"
+        "dvdb-api/prisma/migrations",
+        "dvdb-api/node_modules",
+        "dvdb-api/.vscode"
     ]
 }
