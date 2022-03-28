@@ -17,21 +17,21 @@ const Scene = () => {
     
 
     return (
-        <div className={styles.scene}>
-            <Canvas
-                shadows={true}
-                className={styles.canvas}
-                camera={{
-                position: [-0.175, 0.1, 0.25],
-                }}
-            >
-                <Lights />
-                <OrbitControls />
-                <Suspense fallback={null}>
-                    <Model path="/data/logo.glb" position={[0, 0, 0]}/>
-                </Suspense>
-            </Canvas>
-        </div>
+        <Canvas
+            shadows={true}
+            className={styles.canvas}
+            camera={{
+            position: [-0.175, 0.1, 0.25],
+            rotation: [0, 0, 0.25]
+            }}
+        >
+            <Lights />
+            <OrbitControls />
+            <Suspense fallback={null}>
+                <Model path="/data/logo.glb" position={[0, 0, 0]}/>
+            </Suspense>
+        </Canvas>
+        
   );
 };
 
