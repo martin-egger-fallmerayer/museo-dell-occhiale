@@ -1,7 +1,5 @@
 /* @use "./abstracts/colors"; */
 
-
-
 html,
 body {
 	padding: 0;
@@ -9,8 +7,7 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-  color: white;
-
+	color: white;
 }
 
 a {
@@ -26,10 +23,12 @@ a {
 	height: 100vh;
 	width: 100vw;
 	position: fixed;
-	background: linear-gradient(
-		180deg,
-		#164A41 0%,
-		#4D774E 100%
-	);
+	background: linear-gradient(180deg, #164a41 0%, #4d774e 100%);
 	z-index: -1;
+}
+
+@media screen and (min-width: 992px) {
+	.background {
+		background: linear-gradient(90deg, #164a41 0%, #4d774e 100%);
+	}
 }

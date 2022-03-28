@@ -1,6 +1,9 @@
 import type { NextPage } from "next";
 import styles from "../styles/ProjectHomePage.module.scss";
 import { useRouter } from "next/router";
+import { doc, getDoc, collection, getDocs, DocumentSnapshot, DocumentData } from "firebase/firestore";
+
+
 
 // three.js
 import Scene from "components/three/Scene";
@@ -8,7 +11,7 @@ import Model from "components/three/Model";
 
 // components
 import HeaderMenu from "components/HeaderMenu";
-import { API_BASE } from "constants/network";
+import { db } from "./firebase";
 
 type Props = {
 	project: any;
@@ -21,9 +24,9 @@ type Context = {
 };
 
 const ProjectHomePage: NextPage<Props> = ({ project }) => {
-	
+
 	const router = useRouter()
-	
+
 	return (
 		<>
 			<HeaderMenu />
@@ -52,10 +55,14 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 };
 
 export async function getStaticPaths() {
-	const res = await fetch("http://" + API_BASE + "/projects?names");
-	const names = await res.json();
-	const paths = names.map((name: string) => {
-		return { params: { projectName: name } };
+	// const res = await fetch("http://" + API_BASE + "/projects?names");
+	// const names = await res.json();
+
+	let paths: Object[] = [];
+
+	const querySnapshot = await getDocs(collection(db, "projects"));
+	querySnapshot.forEach((doc) => {
+		paths.push({ params: { projectName: doc.id } })
 	});
 
 	return {
@@ -66,11 +73,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: Context) {
 	const { projectName } = context.params;
-	const res = await fetch("http://" + API_BASE + "/projects/" + projectName);
-	const project = await res.json();
+	const docRef = doc(db, "projects", projectName);
+	const project = await getDoc(docRef);
 
 	return {
-		props: { project },
+		props: { project: project.data() },
 	};
 }
 
