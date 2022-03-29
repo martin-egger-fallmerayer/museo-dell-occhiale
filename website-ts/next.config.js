@@ -1,22 +1,41 @@
 /** @type {import('next').NextConfig} */
 
-const path = require('path')
+const path = require("path");
 
 const nextConfig = {
-  reactStrictMode: true,
-  trailingSlash: true,
-  
-	webpackDevMiddleware: config => {
+	reactStrictMode: true,
+	trailingSlash: true,
+
+	webpackDevMiddleware: (config) => {
 		config.watchOptions = {
 			poll: 1000,
-			aggregateTimeout: 300
-		}
-		return config
+			aggregateTimeout: 300,
+		};
+		return config;
 	},
 
 	sassOptions: {
-		includePaths: [path.join(__dirname, 'styles')]
-	}
-}
+		includePaths: [path.join(__dirname, "styles")],
+	},
 
-module.exports = nextConfig
+	// cors
+	async headers() {
+		return [
+			{
+				source: "/(.*)?",
+				headers: [
+					{
+						key: "Access-Control-Allow-Origin",
+						value: "*",
+					},
+					{
+						key: "Access-Control-Allow-Methods",
+						value: "GET,HEAD,PUT,PATCH,POST,DELETE",
+					},
+				],
+			},
+		];
+	},
+};
+
+module.exports = nextConfig;

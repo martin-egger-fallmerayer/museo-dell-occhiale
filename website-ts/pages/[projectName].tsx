@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
 import styles from "../styles/ProjectHomePage.module.scss";
 import { useRouter } from "next/router";
-import { doc, getDoc, collection, getDocs, DocumentSnapshot, DocumentData } from "firebase/firestore";
-
-
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 // three.js
 import Scene from "components/three/Scene";
@@ -11,7 +9,10 @@ import Model from "components/three/Model";
 
 // components
 import HeaderMenu from "components/HeaderMenu";
-import { db } from "./firebase";
+import { db, storage } from "./firebase";
+import { useEffect, useState } from "react";
+import { useGLTF } from "@react-three/drei";
+import { getDownloadURL, ref } from "firebase/storage";
 
 type Props = {
 	project: any;
@@ -24,8 +25,7 @@ type Context = {
 };
 
 const ProjectHomePage: NextPage<Props> = ({ project }) => {
-
-	const router = useRouter()
+	const router = useRouter();
 
 	return (
 		<>
@@ -33,8 +33,10 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 
 			<div className={styles.body}>
 				<h1>{project.name}</h1>
-				<input type="button" value="Search"
-					onClick={_ => router.push("/" + project.name + "/search")}
+				<input
+					type="button"
+					value="Search"
+					onClick={(_) => router.push("/" + project.name + "/search")}
 				/>
 				<div className={styles.model}>
 					<Scene
@@ -48,7 +50,6 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 					/>
 				</div>
 				<p>{project.description}</p>
-
 			</div>
 		</>
 	);
@@ -62,7 +63,7 @@ export async function getStaticPaths() {
 
 	const querySnapshot = await getDocs(collection(db, "projects"));
 	querySnapshot.forEach((doc) => {
-		paths.push({ params: { projectName: doc.id } })
+		paths.push({ params: { projectName: doc.id } });
 	});
 
 	return {
