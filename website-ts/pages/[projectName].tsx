@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import styles from "../styles/ProjectHomePage.module.scss";
 import { useRouter } from "next/router";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 // three.js
 import Scene from "components/three/Scene";
@@ -71,18 +70,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: Context) {
-	/* const { projectName } = context.params;
-	const docRef = doc(db, "projects", projectName);
-	const project = await getDoc(docRef);
+	const { projectName } = context.params;
+	
+	const res = fetch("http://" + API_BASE + "/api/")
 
-	const projRef = collection(db, "projects/" + projectName + "/test")
-	console.dir(project)
 
 	return {
 		props: {
 			project: project.data(),
 		},
-	}; */
+	};
 }
 
 export default ProjectHomePage;
