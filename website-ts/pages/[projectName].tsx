@@ -9,7 +9,6 @@ import Model from "components/three/Model";
 
 // components
 import HeaderMenu from "components/HeaderMenu";
-import { db, storage } from "./firebase";
 
 type Props = {
 	project: any;
@@ -59,10 +58,10 @@ export async function getStaticPaths() {
 
 	let paths: Object[] = [];
 
-	const querySnapshot = await getDocs(collection(db, "projects"));
+	/* const querySnapshot = await getDocs(collection(db, "projects"));
 	querySnapshot.forEach((doc) => {
 		paths.push({ params: { projectName: doc.id } });
-	});
+	}); */
 
 	return {
 		paths,
@@ -71,7 +70,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: Context) {
-	const { projectName } = context.params;
+	/* const { projectName } = context.params;
 	const docRef = doc(db, "projects", projectName);
 	const project = await getDoc(docRef);
 
@@ -82,7 +81,7 @@ export async function getStaticProps(context: Context) {
 		props: {
 			project: project.data(),
 		},
-	};
+	}; */
 }
 
 export default ProjectHomePage;
