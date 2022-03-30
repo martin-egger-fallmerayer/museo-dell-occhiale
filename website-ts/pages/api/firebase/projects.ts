@@ -1,10 +1,7 @@
-import { doc } from "firebase/firestore";
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "../../firebase";
 
-type Data = {
-	data: String[];
-};
+type Data = string[]
 
 type Query = {
 	by: string;
