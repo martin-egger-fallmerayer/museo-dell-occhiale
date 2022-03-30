@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@firebase/firestore-types": "^2.5.0",
+    "@google-cloud/firestore": "^5.0.2",
     "@react-three/drei": "^8.18.10",
     "@react-three/fiber": "^7.0.26",
     "firebase": "^9.6.10",
+    "firebase-admin": "^10.0.2",
     "firebase-tools": "^10.5.0",
     "next": "12.1.0",
     "react": "17.0.2",

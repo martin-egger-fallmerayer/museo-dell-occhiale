@@ -10,12 +10,10 @@ import Model from "components/three/Model";
 // components
 import HeaderMenu from "components/HeaderMenu";
 import { db, storage } from "./firebase";
-import { useEffect, useState } from "react";
-import { useGLTF } from "@react-three/drei";
-import { getDownloadURL, ref } from "firebase/storage";
 
 type Props = {
 	project: any;
+	categories: any[];
 };
 
 type Context = {
@@ -24,7 +22,7 @@ type Context = {
 	};
 };
 
-const ProjectHomePage: NextPage<Props> = ({ project }) => {
+const ProjectHomePage: NextPage<Props> = ({ project, categories }) => {
 	const router = useRouter();
 
 	return (
@@ -77,8 +75,13 @@ export async function getStaticProps(context: Context) {
 	const docRef = doc(db, "projects", projectName);
 	const project = await getDoc(docRef);
 
+	const projRef = collection(db, "projects/" + projectName + "/test")
+	console.dir(project)
+
 	return {
-		props: { project: project.data() },
+		props: {
+			project: project.data(),
+		},
 	};
 }
 
