@@ -23,7 +23,7 @@ export default async function handler(
 ) {
 	// [GUARD] If requred query params are not given
 	if (!("by" in req.query)) return res.status(500);
-	const { by, q = "", projectName, category } = req.query;
+	const { by, q="", projectName, category } = req.query;
 
 	if (by === "all") {
 		let allDocs: FirebaseFirestore.DocumentData[] = [];
@@ -33,15 +33,12 @@ export default async function handler(
 
 		for (const category of categories) {
 			const docsRef = await category.listDocuments();
-			for (const docRef of docsRef) {
+			docsRef.forEach(async (docRef) => {
 				const document = await docRef.get();
 				const data = document.data();
-				Object.assign(data, {
-					name: document.id,
-					category: category.id,
-				});
+				Object.assign(data, { name: document.id });
 				allDocs.push(data!); // !: surpress undefined
-			}
+			});
 		}
 
 		const filteredDocs = allDocs.filter((doc) => {
@@ -49,18 +46,10 @@ export default async function handler(
 		});
 
 		res.status(200).json({ result: filteredDocs });
-	} else {
-		let allDocs: FirebaseFirestore.DocumentData[] = [];
-
+	} else if (by === "category") {
 		const projectRef = db.collection("projects").doc(String(projectName));
-		const category = projectRef.collection(String(by));
-		console.log(category)
-		const documents = await category.listDocuments();
-		for (const document of documents) {
-			allDocs.push((await document.get()).data)
-		}
-
-
-		res.status(200).json({ result: allDocs });
+		const categoryRef = projectRef.collection(String(category));
+		const cat = await categoryRef.listDocuments()
+		
 	}
 }
