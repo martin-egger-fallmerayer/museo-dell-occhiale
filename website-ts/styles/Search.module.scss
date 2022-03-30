@@ -22,6 +22,7 @@
 			outline: none;
 			font-size: 1.2em;
             color: white;
+            width: 100%;
 		}
 
         svg {
@@ -35,14 +36,33 @@
         display: flex;
         gap: 1em;
         overflow: hidden;
-        overflow-x: scroll;
+        overflow-x: auto;
+        
 
         p {
-            border: 2px solid white;
-            border-radius: .5em;
+            --main-color : rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--main-color);
+            //color: rgba(0, 0, 0, 1);
+            //background-color: var(--main-color);
+
+            border-radius: 10rem;
             font-size: 1.2em;
             padding: .5em 1em;
+            
+            font-weight: bold;
+            
         }
+
+
+        p:active{
+            border: 2px solid 6var(--main-color);
+            color: rgba(0, 0, 0, 1);
+            background-color: var(--main-color);
+            font-weight: bold;
+
+        }
+
+       
 
     }
 

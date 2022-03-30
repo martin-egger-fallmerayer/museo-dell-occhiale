@@ -7,7 +7,6 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         ".vscode": true,
-        "website-ts/.next": true,
         "website-ts/.vscode": true,
         "website-ts/node_modules": true,
         "website-ts/.eslintrc.json": true,
@@ -23,7 +22,6 @@
     },
     "hide-files.files": [
         ".vscode",
-        "website-ts/.next",
         "website-ts/.vscode",
         "website-ts/node_modules",
         "website-ts/.eslintrc.json",

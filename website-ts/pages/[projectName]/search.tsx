@@ -23,7 +23,7 @@ type Context = {
 
 const ProjectHomePage: NextPage<Props> = (props) => {
 	// example data
-	const recentTerms = ["term1", "term2", "term3", "term4", "term5"];
+	const catergories = ["glasses", "binoculars", "term3", "term4", "term5"];
 
 	const searchResults = [
 		{
@@ -102,7 +102,7 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 				</div>
 
 				<div className={styles.recentTerms}>
-					{recentTerms.map((term) => (
+					{catergories.map((term) => (
 						<p key={term}>{term}</p>
 					))}
 				</div>
