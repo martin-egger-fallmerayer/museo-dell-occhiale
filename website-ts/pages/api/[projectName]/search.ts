@@ -10,6 +10,7 @@ type Data = {
 type Query = {
 	by: string;
 	q: string;
+	category: string;
 };
 
 type Document = {
@@ -21,8 +22,8 @@ export default async function handler(
 	res: NextApiResponse<Data>
 ) {
 	// [GUARD] If requred query params are not given
-	if (!("by" in req.query && "q" in req.query)) return res.status(500);
-	const { by, q, projectName } = req.query;
+	if (!("by" in req.query)) return res.status(500);
+	const { by, q="", projectName, category } = req.query;
 
 	if (by === "all") {
 		let allDocs: FirebaseFirestore.DocumentData[] = [];
@@ -40,14 +41,15 @@ export default async function handler(
 			});
 		}
 
-		console.log(allDocs);
-
-		const filteredDocs = allDocs.filter(doc => {
+		const filteredDocs = allDocs.filter((doc) => {
 			return doc.name.includes(q);
 		});
 
 		res.status(200).json({ result: filteredDocs });
 	} else if (by === "category") {
-		res.status(200).json({ name: by });
+		const projectRef = db.collection("projects").doc(String(projectName));
+		const categoryRef = projectRef.collection(String(category));
+		const cat = await categoryRef.listDocuments()
+		
 	}
 }
