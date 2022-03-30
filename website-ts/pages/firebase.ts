@@ -1,20 +1,13 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import firebase from "firebase-admin";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-	apiKey: "AIzaSyB5s2vo-pVMfe1s_pQHY4uiZRPis2NUezU",
-	authDomain: "database-visualization.firebaseapp.com",
-	projectId: "database-visualization",
-	storageBucket: "database-visualization.appspot.com",
-	messagingSenderId: "387405027701",
-	appId: "1:387405027701:web:4a3b23386c0bbfe68bdb3c",
-};
+import serviceAccount from "./api/firebase/database-visualization-firebase-adminsdk-9tx0a-24a6d161bd.json";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+const app = !firebase.apps.length
+	? firebase.initializeApp({
+			credential: firebase.credential.cert(serviceAccount),
+	  })
+	: firebase.app();
+
+const db = app.firestore();
+
+export default db;
