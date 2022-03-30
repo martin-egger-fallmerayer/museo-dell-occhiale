@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "../styles/components/HeaderMenu.module.scss";
 import logo from "../public/Logsiv-logos_white.png";
@@ -9,9 +10,9 @@ const HeaderMenu = () => {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 
 	const navItems = [
-		{ label: "About us", href: "www.fallmerayer.it" },
-		{ label: "item2", href: "#" },
-		{ label: "item3", href: "#" },
+		{ label: "Home", href: "/" },
+		{ label: "About us", href: "https://www.fallmerayer.it" },
+		
 	];
 
 	return (
@@ -43,7 +44,9 @@ const HeaderMenu = () => {
 				}}
 			>
 				{navItems.map((navItem) => (
-					<a key={navItem.label} href={navItem.href}>{navItem.label}</a>
+					<Link  key={navItem.label} href={navItem.href}>
+						<a>{navItem.label}</a>
+						</Link>
 				))}
 			</div>
 		</>
