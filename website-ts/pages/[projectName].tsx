@@ -9,6 +9,7 @@ import Model from "components/three/Model";
 
 // components
 import HeaderMenu from "components/HeaderMenu";
+import { API_BASE } from "constants/network";
 
 type Props = {
 	project: any;
@@ -53,15 +54,15 @@ const ProjectHomePage: NextPage<Props> = ({ project, categories }) => {
 };
 
 export async function getStaticPaths() {
-	// const res = await fetch("http://" + API_BASE + "/projects?names");
-	// const names = await res.json();
+	const res = await fetch("http://" + API_BASE + "/projects?names");
+	const names = await res.json();
 
 	let paths: Object[] = [];
 
-	/* const querySnapshot = await getDocs(collection(db, "projects"));
-	querySnapshot.forEach((doc) => {
-		paths.push({ params: { projectName: doc.id } });
-	}); */
+	// const querySnapshot = await getDocs(collection(db, "projects"));
+	names.forEach((name: string) => {
+		paths.push({ params: { projectName: name } });
+	});
 
 	return {
 		paths,
