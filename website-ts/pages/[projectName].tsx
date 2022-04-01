@@ -56,6 +56,8 @@ export async function getStaticPaths() {
 	const res = await fetch("http://" + API_BASE + "/projects?names");
 	const names = await res.json();
 
+	console.log(names)
+
 	let paths: Object[] = [];
 
 	// const querySnapshot = await getDocs(collection(db, "projects"));

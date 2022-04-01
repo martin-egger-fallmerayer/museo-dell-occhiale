@@ -129,14 +129,13 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 
 export async function getServerSideProps(context: Context) {
 	const { projectName } = context.params;
-	const res = await fetch("http://" + API_BASE + "/projects/" + projectName);
-	const project = await res.json();
+	const res = await fetch("http://" + API_BASE + "/api/" + projectName + "/?by=all");
+	const objects = await res.json();
 
-	// const { q } = context.query;
-	// if (q === undefined) return { props: { project } };
+	console.log(objects)
 
 	return {
-		props: { project },
+		props: { objects },
 	};
 }
 
