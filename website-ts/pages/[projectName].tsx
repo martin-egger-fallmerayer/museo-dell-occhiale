@@ -56,11 +56,7 @@ export async function getStaticPaths() {
 	const res = await fetch("http://" + API_BASE + "/projects?names");
 	const names = await res.json();
 
-	console.log(names)
-
 	let paths: Object[] = [];
-
-	// const querySnapshot = await getDocs(collection(db, "projects"));
 	names.forEach((name: string) => {
 		paths.push({ params: { projectName: name } });
 	});
@@ -74,13 +70,13 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: Context) {
 	const { projectName } = context.params;
 	
-	const res = fetch("http://" + API_BASE + "/api/")
-
+	const res = await fetch("http://" + API_BASE + "/api/" + projectName)
+	const project = await res.json()
 
 	return {
 		props: {
-			project: project.data(),
-		},
+			project
+		}
 	};
 }
 

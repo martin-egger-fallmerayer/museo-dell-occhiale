@@ -1,5 +1,3 @@
-import { doc } from "firebase/firestore";
-import { truncate } from "fs/promises";
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "pages/firebase";
 
@@ -33,12 +31,13 @@ export default async function handler(
 
 		for (const category of categories) {
 			const docsRef = await category.listDocuments();
-			docsRef.forEach(async (docRef) => {
+			for (const docRef of docsRef){
 				const document = await docRef.get();
 				const data = document.data();
 				Object.assign(data, { name: document.id });
 				allDocs.push(data!); // !: surpress undefined
-			});
+			}
+			
 		}
 
 		const filteredDocs = allDocs.filter((doc) => {

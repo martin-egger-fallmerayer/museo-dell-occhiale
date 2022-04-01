@@ -86,6 +86,14 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 		"q" in props ? props.q : ""
 	);
 
+
+	function onChangeSearch(e:any){
+		let term = e.target.value;
+
+		
+
+	}
+
 	return (
 		<>
 			<HeaderMenu />
@@ -109,7 +117,7 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 
 				<div className={styles.searchResults}>
 					{searchResults.map((result) => (
-						<div className={styles.resultCard}>
+						<div key={result.title} className={styles.resultCard}>
 							<img
 								src="https://via.placeholder.com/150"
 								alt={result.img}
@@ -129,7 +137,7 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 
 export async function getServerSideProps(context: Context) {
 	const { projectName } = context.params;
-	const res = await fetch("http://" + API_BASE + "/api/" + projectName + "/?by=all");
+	const res = await fetch("http://" + API_BASE + "/api/" + projectName + "/search?by=all");
 	const objects = await res.json();
 
 	console.log(objects)
