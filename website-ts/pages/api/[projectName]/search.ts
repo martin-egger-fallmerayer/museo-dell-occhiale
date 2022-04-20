@@ -34,7 +34,7 @@ export default async function handler(
 			for (const docRef of docsRef){
 				const document = await docRef.get();
 				const data = document.data();
-				Object.assign(data, { name: document.id });
+				Object.assign(data, { name: document.id, category: category.id });
 				allDocs.push(data!); // !: surpress undefined
 			}
 			
