@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
-import { ref, getDownloadURL } from "firebase/storage";
-import { storage } from "pages/firebase";
 
 type Props = {
 	path: string;
@@ -10,7 +7,9 @@ type Props = {
 
 const Model = ({ path, position }: Props) => {
 	// const [modelUrl, setModelUrl] = useState("");
+	// const { scene } = useGLTF(path, true);
 	const { scene } = useGLTF(path, true);
+
 
 	return <primitive position={position} object={scene} dispose={null} />;
 };

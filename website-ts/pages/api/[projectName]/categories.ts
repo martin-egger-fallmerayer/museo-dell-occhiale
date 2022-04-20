@@ -2,9 +2,7 @@ import { DocumentData } from "@google-cloud/firestore";
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "pages/firebase";
 
-type Data = {
-	project: DocumentData | undefined;
-};
+type Data = any[];
 
 export default async function handler(
 	req: NextApiRequest,
@@ -12,12 +10,11 @@ export default async function handler(
 ) {
 	const { projectName } = req.query;
 
-	const projectObj = await db
-		.collection("projects")
-		.doc(String(projectName))
-		.get();
-
-	const project: any = projectObj.data()
+	const projRef = db.collection("projects").doc(String(projectName));
+	const categoriesRef = await projRef.listCollections()
 	
-	res.status(200).json(project);
+	let categories: Data = []
+	categoriesRef.forEach(category => categories.push(category.id))
+	
+	res.status(200).json(categories);
 }

@@ -3,14 +3,15 @@ import type { NextPage } from "next";
 import styles from "../../styles/Search.module.scss";
 
 import { HiSearch } from "react-icons/hi";
-import { useState } from "react";
+import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
 import { Router, useRouter } from "next/router";
 import { API_BASE } from "constants/network";
 
 type Props = {
-	project: any;
-	q: string;
+	objects: any;
 };
+
+
 
 type Context = {
 	params: {
@@ -21,76 +22,19 @@ type Context = {
 	};
 };
 
-const ProjectHomePage: NextPage<Props> = (props) => {
+const ProjectHomePage: NextPage<Props> = ({objects}) => {
 	// example data
 	const catergories = ["glasses", "binoculars", "term3", "term4", "term5"];
 
-	const searchResults = [
-		{
-			img: "",
-			title: "title1",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title2",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title3",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title4",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title5",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title6",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title7",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title8",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-		{
-			img: "",
-			title: "title9",
-			content:
-				"asdlköfjasdlkföjaslödkjflöaksjdföljsadfölkjasdlöfkjasöldkfjasödlkfjasödlfkjasldkjffsdölkj",
-		},
-	];
+	const [searchResults, setSearchResult] = useState(objects);
 
-	const [searchTerm, setSearchTerm] = useState<string>(
-		"q" in props ? props.q : ""
-	);
+	const [searchTerm, setSearchTerm] = useState<string>("");
 
 
 	function onChangeSearch(e:any){
-		let term = e.target.value;
+		setSearchTerm(e.target.value);
 
-		
+		setSearchResult(objects.filter((object: any) => object.name.toLowerCase().includes(e.target.value.toLowerCase())));
 
 	}
 
@@ -104,7 +48,7 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 						type="text"
 						placeholder="Search..."
 						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
+						onChange={onChangeSearch}
 					/>
 					<HiSearch />
 				</div>
@@ -116,16 +60,16 @@ const ProjectHomePage: NextPage<Props> = (props) => {
 				</div>
 
 				<div className={styles.searchResults}>
-					{searchResults.map((result) => (
-						<div key={result.title} className={styles.resultCard}>
+					{searchResults.map((result: any) => (
+						<div key={result.name} className={styles.resultCard}>
 							<img
 								src="https://via.placeholder.com/150"
 								alt={result.img}
 							/>
 
 							<div>
-								<h3>{result.title}</h3>
-								<p>{result.content}</p>
+								<h3>{result.name}</h3>
+								<p>{result.description}</p>
 							</div>
 						</div>
 					))}
@@ -140,10 +84,11 @@ export async function getServerSideProps(context: Context) {
 	const res = await fetch("http://" + API_BASE + "/api/" + projectName + "/search?by=all");
 	const objects = await res.json();
 
-	console.log(objects)
 
 	return {
-		props: { objects },
+		props: { 
+			objects: objects.result
+		 },
 	};
 }
 

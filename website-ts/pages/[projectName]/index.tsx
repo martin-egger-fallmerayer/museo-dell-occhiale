@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import styles from "../styles/ProjectHomePage.module.scss";
+import styles from "../../styles/ProjectHomePage.module.scss";
 import { useRouter } from "next/router";
 
 // three.js
@@ -21,7 +21,7 @@ type Context = {
 	};
 };
 
-const ProjectHomePage: NextPage<Props> = ({ project, categories }) => {
+const ProjectHomePage: NextPage<Props> = ({ project }) => {
 	const router = useRouter();
 
 	return (
@@ -53,7 +53,7 @@ const ProjectHomePage: NextPage<Props> = ({ project, categories }) => {
 };
 
 export async function getStaticPaths() {
-	const res = await fetch("http://" + API_BASE + "/projects?names");
+	const res = await fetch("http://" + API_BASE + "/api/projects?names");
 	const names = await res.json();
 
 	let paths: Object[] = [];
