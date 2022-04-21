@@ -55,7 +55,7 @@
 
 
         p:active{
-            border: 2px solid 6var(--main-color);
+            border: 2px solid 6 var(--main-color);
             color: rgba(0, 0, 0, 1);
             background-color: var(--main-color);
             font-weight: bold;
@@ -64,6 +64,13 @@
 
        
 
+    }
+
+    .activeCatergory{
+        border: 2px solid 6 var(--main-color);
+        color: rgba(0, 0, 0, 1);
+        background-color: var(--main-color);
+        font-weight: bold;
     }
 
     .searchResults {

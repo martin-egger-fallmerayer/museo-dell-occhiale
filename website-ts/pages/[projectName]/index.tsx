@@ -12,6 +12,7 @@ import { API_BASE } from "constants/network";
 
 type Props = {
 	project: any;
+	projectName: string;
 	categories: any[];
 };
 
@@ -21,7 +22,7 @@ type Context = {
 	};
 };
 
-const ProjectHomePage: NextPage<Props> = ({ project }) => {
+const ProjectHomePage: NextPage<Props> = ({ project, projectName }) => {
 	const router = useRouter();
 
 	return (
@@ -33,7 +34,7 @@ const ProjectHomePage: NextPage<Props> = ({ project }) => {
 				<input
 					type="button"
 					value="Search"
-					onClick={(_) => router.push("/" + project.name + "/search")}
+					onClick={(_) => router.push("/" + projectName + "/search")}
 				/>
 				<div className={styles.model}>
 					<Scene
@@ -75,7 +76,8 @@ export async function getStaticProps(context: Context) {
 
 	return {
 		props: {
-			project
+			project,
+			projectName
 		}
 	};
 }

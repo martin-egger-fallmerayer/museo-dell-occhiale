@@ -3,15 +3,13 @@ import type { NextPage } from "next";
 import styles from "../../styles/Search.module.scss";
 
 import { HiSearch } from "react-icons/hi";
-import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
-import { Router, useRouter } from "next/router";
+import { useState } from "react";
 import { API_BASE } from "constants/network";
 
 type Props = {
 	objects: any;
+	categories: any
 };
-
-
 
 type Context = {
 	params: {
@@ -22,13 +20,13 @@ type Context = {
 	};
 };
 
-const ProjectHomePage: NextPage<Props> = ({objects}) => {
-	// example data
-	const catergories = ["glasses", "binoculars", "term3", "term4", "term5"];
+const ProjectHomePage: NextPage<Props> = ({objects, categories}) => {
 
 	const [searchResults, setSearchResult] = useState(objects);
 
 	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [selectedCategories, setSelectedCategories] = useState([])
+	
 
 
 	function onChangeSearch(e:any){
@@ -36,6 +34,17 @@ const ProjectHomePage: NextPage<Props> = ({objects}) => {
 
 		setSearchResult(objects.filter((object: any) => object.name.toLowerCase().includes(e.target.value.toLowerCase())));
 
+	}
+
+	const handleSearchByCategory = (e: any) => {
+		// ui sochn
+		e.preventDefault();
+		
+
+
+
+		// search sochn
+		setSearchResult(objects.filter((object: any) => object.category.includes(e.target.value)));
 	}
 
 	return (
@@ -54,8 +63,10 @@ const ProjectHomePage: NextPage<Props> = ({objects}) => {
 				</div>
 
 				<div className={styles.recentTerms}>
-					{catergories.map((term) => (
-						<p key={term}>{term}</p>
+					{categories.map((term: any) => (
+						<p key={term}
+							onClick={handleSearchByCategory}
+						>{term}</p>
 					))}
 				</div>
 
@@ -84,10 +95,13 @@ export async function getServerSideProps(context: Context) {
 	const res = await fetch("http://" + API_BASE + "/api/" + projectName + "/search?by=all");
 	const objects = await res.json();
 
+	const resCat = await fetch("http://" + API_BASE + "/api/" + projectName + "/categories");
+	const categories = await resCat.json();
 
 	return {
 		props: { 
-			objects: objects.result
+			objects: objects.result,
+			categories: categories
 		 },
 	};
 }

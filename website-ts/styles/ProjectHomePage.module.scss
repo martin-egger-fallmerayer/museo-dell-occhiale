@@ -10,7 +10,8 @@
 	h1 {
 		margin-top: 0.8em;
         margin-bottom: 0;
-		font-size: 3em;
+		
+		font-size: 4em;
 		font-family: fonts.$big-shoulders-display;
 		text-align: center;
 		text-transform: uppercase;
@@ -47,18 +48,21 @@
     .body {
         align-items: flex-start;
         justify-content: flex-start;
+		padding-left: 2.5%;
 
         h1 {
             // height: 5em;
-            font-size: 7em;
+            font-size: 12em;
             text-align: start;
             width: 12ch;
-            margin-top: .2em;
+            margin-top: .1em;
         }
 
         input[type="button"] {
-            margin-top: 1.5em;
+            margin-top: 1em;
             padding: .5em 4em;
+			width: 20%;
+		
         }
 
         p {
