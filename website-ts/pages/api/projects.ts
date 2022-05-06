@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "../firebase";
+import db from "./firebase";
 
 type Data = string[]
 
@@ -16,10 +16,13 @@ export default async function handler (
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
+    res.status(200).json(await getAllProjectNames())
+}
+
+export const getAllProjectNames = async () => {
 	const projRef = await db.collection("projects").listDocuments();
-    const projects = projRef.map((projectRef) => {
+	return projRef.map((projectRef) => {
         const name = projectRef.id
         return name 
     });
-    res.status(200).json(projects)
 }

@@ -10,6 +10,9 @@ import Model from "components/three/Model";
 import HeaderMenu from "components/HeaderMenu";
 import { API_BASE } from "constants/network";
 
+// API
+import { getAllProjectNames } from "../api/projects"
+
 type Props = {
 	project: any;
 	projectName: string;
@@ -54,8 +57,10 @@ const ProjectHomePage: NextPage<Props> = ({ project, projectName }) => {
 };
 
 export async function getStaticPaths() {
-	const res = await fetch("http://" + API_BASE + "/api/projects?names");
-	const names = await res.json();
+	// const res = await fetch("http://" + API_BASE + "/api/projects?names");
+	// const names = await res.json();
+
+	const names = await getAllProjectNames()
 
 	let paths: Object[] = [];
 	names.forEach((name: string) => {

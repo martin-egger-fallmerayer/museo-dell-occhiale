@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-import styles from "../../../styles/ProjectHomePage.module.scss";
-import { useRouter } from "next/router";
+import styles from "../../../styles/ObjectPage.module.scss";
 
 // components
 import HeaderMenu from "components/HeaderMenu";
@@ -18,42 +17,42 @@ type Context = {
 	};
 };
 
-const ProjectHomePage: NextPage<Props> = ({ object }) => {
-	const router = useRouter();
+const ObjectPage: NextPage<Props> = ({ object }) => {
 
 	return (
 		<>
 			<HeaderMenu />
 
 			<div className={styles.body}>
-				<h1>{object.name}</h1>				
-				<p>{object.description}</p>
-                <p>{object.location}</p>
-                <img src={object.image} alt={object.name} />
+				<div className={styles.container}>
+					
+					<div className={styles.left}>
+						<h1>{object.name}</h1>
+						<div className={styles.descriptionContainer}>
+							<h2>Description</h2>
+							<p>{object.description}</p>
+						</div>
+
+						<div className={styles.locationContainer}>
+							<h2>Location</h2>
+							<p>{object.location}</p>
+						</div>
+					</div>
+
+					<div className={styles.right}>
+						<img src={object.image} alt={object.id} />
+					</div>
+				</div>
+
+
 			</div>
 		</>
 	);
 };
 
-// export async function getStaticPaths() {
-//     const { projectName, categoryName } = context.params
-// 	const res = await fetch("http://" + API_BASE + "/api/" + projectName + "/" + categoryName);
-// 	const names = await res.json();
-
-// 	let paths: Object[] = [];
-// 	names.forEach((name: string) => {
-// 		paths.push({ params: { objectName: name } });
-// 	});
-
-// 	return {
-// 		paths,
-// 		fallback: false,
-// 	};
-// }
-
 export async function getServerSideProps(context: Context) {
 	const { projectName, categoryName, objectName } = context.params;
-	
+
 	console.log(context.params)
 
 	const res = await fetch(`http://${API_BASE}/api/${projectName}/${categoryName}/${objectName}`)
@@ -66,4 +65,4 @@ export async function getServerSideProps(context: Context) {
 	};
 }
 
-export default ProjectHomePage;
+export default ObjectPage;

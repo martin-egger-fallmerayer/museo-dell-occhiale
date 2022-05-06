@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "pages/firebase";
+import db from "../../firebase";
 
 type Data = any[];
 
@@ -14,7 +14,7 @@ export default async function handler(
     const objectsRef = await categoryRef.listDocuments()
 	
 	let objectNames: Data = []
-	objectsRef.forEach(object => objectNames.push(object.id))
+	objectsRef.forEach((object: { id: any; }) => objectNames.push(object.id))
 	
 	res.status(200).json(objectNames);
 }

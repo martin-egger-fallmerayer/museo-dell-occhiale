@@ -29,6 +29,12 @@
 		border-radius: 1em;
 	}
 
+	input[type="button"]:active {
+		background-color: black;
+		color: white;
+	
+	}
+
 	.model {
 		margin-top: 3em;
 		text-align: center;
@@ -64,6 +70,8 @@
 			width: 20%;
 		
         }
+
+		
 
         p {
             font-size: 1.2em;

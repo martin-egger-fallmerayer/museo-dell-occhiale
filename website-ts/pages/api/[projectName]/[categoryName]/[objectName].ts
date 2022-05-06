@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "pages/firebase";
+import db from "../../firebase";
 
 type Data = FirebaseFirestore.DocumentData | undefined;
 
@@ -12,7 +12,9 @@ export default async function handler(
 	const projRef = db.collection("projects").doc(String(projectName));
 	const categoryRef = projRef.collection(String(categoryName))
     const objectRef = await categoryRef.doc(String(objectName)).get()
-	const object = objectRef.data()
 	
+    let object = objectRef.data()
+    Object.assign(object, { id: objectRef.id })
+
 	res.status(200).json(object);
 }

@@ -18,6 +18,15 @@ const nextConfig = {
 		includePaths: [path.join(__dirname, "styles")],
 	},
 
+	
+	webpack5: true,
+	webpack: (config) => {
+		config.resolve.fallback = { "https": false, "assert": false, "fs": false, "path": false, "os": false, "util": false, "process": false, "events": false, "stream": false, "zlib": false, "crypto": false, "querystring": false };
+	
+		return config;
+	},
+	  
+
 	// cors
 	async headers() {
 		return [

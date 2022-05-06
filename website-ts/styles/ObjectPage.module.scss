@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5em 10em;
+
+    .left {
+        h1 {
+            margin-top: 0.3em;
+            font-size: 8em;
+        }
+
+        h2{
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        p{
+            font-size: 1.2em;
+            margin-top: 0.5em;
+        }
+    }
+
+    .right{
+
+        img{
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            width: 30em;
+            border-radius: 5%;
+        }
+    }
+
+}

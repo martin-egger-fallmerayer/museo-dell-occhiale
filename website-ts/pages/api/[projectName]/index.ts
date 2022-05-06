@@ -1,6 +1,6 @@
 import { DocumentData } from "@google-cloud/firestore";
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "pages/firebase";
+import db from "../firebase";
 
 type Data = {
 	project: DocumentData | undefined;

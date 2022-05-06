@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "pages/firebase";
+import db from "../firebase";
 
 type Data = {
 	result: FirebaseFirestore.DocumentData[] | undefined;
@@ -34,7 +34,7 @@ export default async function handler(
 			for (const docRef of docsRef){
 				const document = await docRef.get();
 				const data = document.data();
-				Object.assign(data, { name: document.id, category: category.id });
+				Object.assign(data, { id: document.id, category: category.id });
 				allDocs.push(data!); // !: surpress undefined
 			}
 			

@@ -8,7 +8,7 @@ type Props = {
 const Model = ({ path, position }: Props) => {
 	// const [modelUrl, setModelUrl] = useState("");
 	// const { scene } = useGLTF(path, true);
-	const { scene } = useGLTF(path, true);
+	const { scene } = useGLTF(path || "/data/models/Persian.glb", true);
 
 
 	return <primitive position={position} object={scene} dispose={null} />;

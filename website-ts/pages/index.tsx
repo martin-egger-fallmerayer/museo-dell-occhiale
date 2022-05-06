@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <>
       	{/* Header */}
-			<HeaderMenu />
+		<HeaderMenu />
 
       	<div className={styles.model}>
 			<Logo/>

@@ -20,7 +20,7 @@ const HeaderMenu = () => {
 			{/* Header */}
 			<div className={styles.header}>
 				<Image src={logo} height={90} width={90} />
-				<p>TFO Fallmerayer</p>
+				<p></p>
 				<div>
 					{!showMenu ? (
 						<HiMenu
